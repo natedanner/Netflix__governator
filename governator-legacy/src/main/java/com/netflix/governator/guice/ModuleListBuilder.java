@@ -47,7 +47,7 @@ public class ModuleListBuilder {
     public class ModuleProvider {
         Class<? extends Module> type;
         Module instance;
-        boolean isExcluded = false;
+        boolean isExcluded;
         
         public ModuleProvider(Class<? extends Module> type) {
             this.type = type;
@@ -141,7 +141,7 @@ public class ModuleListBuilder {
         
         private List<Class<? extends Module>> getIncludeList() {
             // Look for @Modules(includes={..})
-            Builder<Class<? extends Module>> builder = ImmutableList.<Class<? extends Module>>builder();
+            Builder<Class<? extends Module>> builder = ImmutableList.builder();
             if (type != null) {
                 Modules annot = type.getAnnotation(Modules.class);
                 if (annot != null && annot.include() != null) {
@@ -161,7 +161,7 @@ public class ModuleListBuilder {
         }
         
         private List<Class<? extends Module>> getExcludeList() {
-            Builder<Class<? extends Module>> builder = ImmutableList.<Class<? extends Module>>builder();
+            Builder<Class<? extends Module>> builder = ImmutableList.builder();
             if (type != null) {
                 Modules annot = type.getAnnotation(Modules.class);
                 if (annot != null && annot.exclude() != null) {
@@ -172,22 +172,22 @@ public class ModuleListBuilder {
         }
 
     }
-    
+
     // List of all identified Modules in the order in which they were added and identified
-    private List<ModuleProvider> providers = Lists.newArrayList();
-    
+    private final List<ModuleProvider> providers = Lists.newArrayList();
+
     // Map of seen class to the provider.  Note that this map will not include any module
     // that is a simple 
-    private Map<Class<? extends Module>, ModuleProvider> includes = Maps.newIdentityHashMap();
-    
+    private final Map<Class<? extends Module>, ModuleProvider> includes = Maps.newIdentityHashMap();
+
     // Set of module classes to exclude
-    private Set<Class<? extends Module>> excludes = Sets.newIdentityHashSet();
-    
+    private final Set<Class<? extends Module>> excludes = Sets.newIdentityHashSet();
+
     // Final list of modules to install
-    private List<Module> resolvedModules = Lists.newArrayList();
-    
+    private final List<Module> resolvedModules = Lists.newArrayList();
+
     // Lookup of resolved modules for duplicate check
-    private Set<Class<? extends Module>> resolvedModuleLookup = Sets.newIdentityHashSet();
+    private final Set<Class<? extends Module>> resolvedModuleLookup = Sets.newIdentityHashSet();
     
     public ModuleListBuilder includeModules(Iterable<? extends Module> modules) {
         for (Module module : modules) {

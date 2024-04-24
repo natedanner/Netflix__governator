@@ -16,8 +16,8 @@ import com.google.inject.spi.ProviderKeyBinding;
 import com.google.inject.spi.UntargettedBinding;
 
 class CopyBindingTargetVisitor<T> implements BindingTargetVisitor<T, Void> {
-    
-    private LinkedBindingBuilder<T> builder;
+
+    private final LinkedBindingBuilder<T> builder;
 
     public CopyBindingTargetVisitor(LinkedBindingBuilder<T> builder) {
         this.builder = builder;

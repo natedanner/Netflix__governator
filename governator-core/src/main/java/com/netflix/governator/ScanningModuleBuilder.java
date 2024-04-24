@@ -43,9 +43,9 @@ public class ScanningModuleBuilder {
     private static final Logger LOG = LoggerFactory.getLogger(ScanningModuleBuilder.class);
     
     private Set<String> packages = new HashSet<>();
-    private List<AnnotatedClassScanner> scanners = new ArrayList<>();
+    private final List<AnnotatedClassScanner> scanners = new ArrayList<>();
     private ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    private Predicate<Class<?>> excludeRule = (cls) -> false;
+    private Predicate<Class<?>> excludeRule = cls -> false;
     
     /**
      * Specify a custom class loader to use.  If not specified Thread.currentThread().getContextClassLoader()
@@ -122,7 +122,7 @@ public class ScanningModuleBuilder {
             for (String pkg : packages) {
                 if (cls.getPackage().getName().startsWith(pkg)) {
                     return true;
-                };
+                }
             }
             return false;
         });
@@ -135,7 +135,7 @@ public class ScanningModuleBuilder {
      */
     public ScanningModuleBuilder excludeClasses(Set<Class<?>> classes) {
         final Set<Class<?>> toTest = new HashSet<>(classes);
-        return excludeClassesWhen(cls -> toTest.contains(cls));
+        return excludeClassesWhen(toTest::contains);
     }
     
     public Module build() {
@@ -240,7 +240,7 @@ public class ScanningModuleBuilder {
         private void scanPackage(URL url, String basePackage, Consumer<String> consumer) {
             File dir = ClasspathUrlDecoder.toFile(url);
             if (dir.isDirectory()) {
-                scanDir(dir, (basePackage.length() > 0) ? (basePackage + ".") : "", consumer);
+                scanDir(dir, basePackage.length() > 0 ? (basePackage + ".") : "", consumer);
             }
         }
 

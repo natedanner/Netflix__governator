@@ -7,7 +7,7 @@ import com.netflix.governator.lifecycle.ClasspathScanner;
 
 public class LoadersBootstrapModule implements BootstrapModule {
 
-    private ClasspathScanner scanner;
+    private final ClasspathScanner scanner;
 
     public LoadersBootstrapModule(ClasspathScanner scanner) {
         this.scanner = scanner;

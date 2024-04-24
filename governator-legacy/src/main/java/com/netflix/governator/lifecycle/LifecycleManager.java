@@ -71,9 +71,9 @@ public class LifecycleManager implements Closeable, PostInjectorAction
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final ConcurrentMap<Object, LifecycleStateWrapper> objectStates = new MapMaker().weakKeys().initialCapacity(I16_65536).concurrencyLevel(I10_1024).makeMap();
     private final PreDestroyLifecycleFeature preDestroyLifecycleFeature = new PreDestroyLifecycleFeature(ValidationMode.LAX);
-    private final ConcurrentMap<Class<?>, List<LifecycleAction>> preDestroyActionCache = new ConcurrentHashMap<Class<?>, List<LifecycleAction>>(I15_32768);
+    private final ConcurrentMap<Class<?>, List<LifecycleAction>> preDestroyActionCache = new ConcurrentHashMap<>(I15_32768);
 
-    private final AtomicReference<State> state = new AtomicReference<State>(State.LATENT);
+    private final AtomicReference<State> state = new AtomicReference<>(State.LATENT);
     private final ConfigurationDocumentation configurationDocumentation;
     private final ConfigurationProvider configurationProvider;
     private final ConfigurationMapper configurationMapper;

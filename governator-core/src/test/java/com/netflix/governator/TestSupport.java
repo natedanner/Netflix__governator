@@ -27,8 +27,8 @@ public class TestSupport {
         }
     }
 
-    private InstancesModule module = new InstancesModule();
-    private IdentityHashMap<GovernatorFeature<?>, Object> features = new IdentityHashMap<>();
+    private final InstancesModule module = new InstancesModule();
+    private final IdentityHashMap<GovernatorFeature<?>, Object> features = new IdentityHashMap<>();
     
     
     public static Module asModule(final Object o) {

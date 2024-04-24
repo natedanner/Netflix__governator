@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * Convenience factory for getting standard ownership policies
  */
-public class ConfigurationOwnershipPolicies
+public final class ConfigurationOwnershipPolicies
 {
     /**
      * Return an ownership policy that returns true for {@link ConfigurationOwnershipPolicy#has(ConfigurationKey, Map)}

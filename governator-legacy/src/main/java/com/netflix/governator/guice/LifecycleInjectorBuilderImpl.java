@@ -34,10 +34,10 @@ class LifecycleInjectorBuilderImpl implements LifecycleInjectorBuilder
     private ModuleListBuilder modules = new ModuleListBuilder();
     private Collection<Class<?>> ignoreClasses = Lists.newArrayList();
     private Collection<String> basePackages = Lists.newArrayList();
-    private boolean disableAutoBinding = false;
-    private boolean requireExplicitBindings = false;
+    private boolean disableAutoBinding;
+    private boolean requireExplicitBindings;
     private List<BootstrapModule> bootstrapModules = Lists.newArrayList();
-    private ClasspathScanner scanner = null;
+    private ClasspathScanner scanner;
     private Stage stage = Stage.PRODUCTION;
     @SuppressWarnings("deprecation")
     private LifecycleInjectorMode lifecycleInjectorMode = LifecycleInjectorMode.REAL_CHILD_INJECTORS;
@@ -108,8 +108,9 @@ class LifecycleInjectorBuilderImpl implements LifecycleInjectorBuilder
     @Override
     public LifecycleInjectorBuilder withRootModule(Class<?> rootModule) 
     {
-        if (rootModule == null)
+        if (rootModule == null) {
             return this;
+        }
         return withModuleClass((Class<? extends Module>) rootModule);
     }
     

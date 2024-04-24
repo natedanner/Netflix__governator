@@ -12,7 +12,7 @@ public class ObjectWithConfigVariable {
     private final String name;
     
     @Configuration(value = "${name}.b", documentation = "this is a boolean")
-    public boolean aBool = false;
+    public boolean aBool;
 
     @Configuration("${name}.i")
     public int anInt = 1;
@@ -27,7 +27,7 @@ public class ObjectWithConfigVariable {
     public String aString = "test";
 
     @Configuration("${name}.dt")
-    public Date aDate = null;
+    public Date aDate;
 
     @Configuration(value = "${name}.obj")
     public List<Integer> ints = Arrays.asList(5, 6, 7);

@@ -37,8 +37,8 @@ public abstract class ServiceLoaderModule extends AbstractModule {
     static class ServiceBinderImpl<S> extends AbstractModule implements ServiceBinder<S> {
         private final Class<S> type;
         private ClassLoader classLoader;
-        private boolean installed = false;
-        private boolean asMultibinding = false;
+        private boolean installed;
+        private boolean asMultibinding;
         
         ServiceBinderImpl(Class<S> type) {
             this.type = type;
@@ -98,7 +98,7 @@ public abstract class ServiceLoaderModule extends AbstractModule {
                 try {
                     for (S service : loader.call()) {
                         System.out.println("Adding binding for service : " + service.getClass().getName());
-                        ServiceProvider<S> provider = new ServiceProvider<S>(service);
+                        ServiceProvider<S> provider = new ServiceProvider<>(service);
                         binding.addBinding().toProvider(provider).in(Scopes.SINGLETON);
                     }
                 } catch (Exception e) {
@@ -136,7 +136,7 @@ public abstract class ServiceLoaderModule extends AbstractModule {
      * @param type
      */
     public <S> ServiceBinder<S> bindServices(final Class<S> type) {
-        ServiceBinderImpl<S> binder = new ServiceBinderImpl<S>(type);
+        ServiceBinderImpl<S> binder = new ServiceBinderImpl<>(type);
         binders.add(binder);
         return binder;
     }

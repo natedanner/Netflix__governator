@@ -13,7 +13,7 @@ import com.google.inject.Scopes;
 
 public class LocalScope implements Scope {
 
-    final ThreadLocal<Map<Key<?>, Object>> content = new ThreadLocal<Map<Key<?>, Object>>();
+    final ThreadLocal<Map<Key<?>, Object>> content = new ThreadLocal<>();
 
     public void enter() {
         checkState(content.get() == null, "LocalScope already exists in thread %s", Thread.currentThread());

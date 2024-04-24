@@ -89,7 +89,7 @@ public class JerseyServerTest {
             URL url = new URL(String.format("http://localhost:%d/", port));
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             Assert.assertEquals(200,  conn.getResponseCode());
-        };
+        }
     }
     
     @Test
@@ -155,7 +155,7 @@ public class JerseyServerTest {
     @Path("/")
     @Singleton
     public static class FieldInjectionResource {
-        private static int createCount = 0;
+        private static int createCount;
         
         public FieldInjectionResource() {
             createCount++;

@@ -18,7 +18,7 @@ import com.google.inject.spi.Toolable;
 public class StringOptionProvider implements ProviderWithExtensionVisitor<String> {
 
     private CommandLine commandLine;
-    private Option option;
+    private final Option option;
     private String defaultValue;
 
     public StringOptionProvider(Option option, String defaultValue) {

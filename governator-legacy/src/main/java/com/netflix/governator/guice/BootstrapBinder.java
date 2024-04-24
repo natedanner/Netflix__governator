@@ -56,7 +56,7 @@ public class BootstrapBinder implements Binder
     private final Binder binder;
     private Stage stage;
     private LifecycleInjectorMode mode;
-    private ModuleListBuilder modules;
+    private final ModuleListBuilder modules;
     private boolean disableAutoBinding;
     
     BootstrapBinder(Binder binder, Stage stage, LifecycleInjectorMode mode, ModuleListBuilder modules, Collection<PostInjectorAction> actions, Collection<ModuleTransformer> transformers, boolean disableAutoBinding)
@@ -82,8 +82,9 @@ public class BootstrapBinder implements Binder
     	StackTraceElement[] stack = Thread.currentThread().getStackTrace();
     	for (int i = 1; i < stack.length ; i++) {
     		StackTraceElement elem = stack[i];
-    		if (!elem.getClassName().equals(BootstrapBinder.class.getCanonicalName()))
-    			return elem.toString();
+            if (!elem.getClassName().equals(BootstrapBinder.class.getCanonicalName())) {
+                return elem.toString();
+            }
     	}
     	return stack[0].toString();
     }

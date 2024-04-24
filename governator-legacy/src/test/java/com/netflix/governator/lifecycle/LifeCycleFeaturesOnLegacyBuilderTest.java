@@ -40,8 +40,8 @@ public class LifeCycleFeaturesOnLegacyBuilderTest {
     static class LifecycleSubject {
         private Logger logger = LoggerFactory.getLogger(LifecycleSubject.class);
         private String name;
-        private volatile boolean postConstructed = false;
-        private volatile boolean preDestroyed = false;
+        private volatile boolean postConstructed;
+        private volatile boolean preDestroyed;
 
         private static AtomicInteger instanceCounter = new AtomicInteger(0);
 

@@ -5,7 +5,7 @@ public class GovernatorFeature<T> {
     private final T defaultValue;
     
     public static <T> GovernatorFeature<T> create(String key, T defaultValue) {
-        return new GovernatorFeature<T>(key, defaultValue);
+        return new GovernatorFeature<>(key, defaultValue);
     }
     
     public GovernatorFeature(String key, T defaultValue) {

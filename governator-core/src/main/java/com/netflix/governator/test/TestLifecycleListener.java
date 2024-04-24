@@ -9,9 +9,9 @@ public abstract class TestLifecycleListener implements LifecycleListener {
     @Inject
     Injector injector;
 
-    private boolean isStarted = false;
-    private boolean isStopped = false;
-    private Throwable error = null;
+    private boolean isStarted;
+    private boolean isStopped;
+    private Throwable error;
     
     @Override
     public void onStarted() {

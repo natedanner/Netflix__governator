@@ -42,13 +42,13 @@ import com.netflix.governator.lifecycle.LifecycleManagerArguments;
 class InternalBootstrapModule extends AbstractModule
 {
     private BootstrapBinder bootstrapBinder;
-    private ClasspathScanner scanner;
+    private final ClasspathScanner scanner;
     private Stage stage;
     private LifecycleInjectorMode mode;
-    private ModuleListBuilder modules;
-    private Collection<PostInjectorAction> actions;
-    private Collection<ModuleTransformer> transformers;
-    private boolean disableAutoBinding;
+    private final ModuleListBuilder modules;
+    private final Collection<PostInjectorAction> actions;
+    private final Collection<ModuleTransformer> transformers;
+    private final boolean disableAutoBinding;
     private final Collection<BootstrapModule> bootstrapModules;
     
     private static class LifecycleConfigurationProvidersProvider implements Provider<LifecycleConfigurationProviders>

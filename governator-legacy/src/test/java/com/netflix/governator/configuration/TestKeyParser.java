@@ -27,22 +27,22 @@ public class TestKeyParser
     private static final String     VALUE = "value";
     private static final String     VARIABLE = "variable";
 
-    private static String[][]       tests =
-    {
-        {"one two three", VALUE, "one two three"},
-        {"one ${two} three", VALUE, "one ", VARIABLE, "two", VALUE, " three"},
-        {"${two}", VARIABLE, "two"},
-        {"${a}b", VARIABLE, "a", VALUE, "b"},
-        {"a${b}", VALUE, "a", VARIABLE, "b"},
-        {"", VALUE, ""},
-        {"1 ${a} 2 ${b}", VALUE, "1 ", VARIABLE, "a", VALUE, " 2 ", VARIABLE, "b"},
-        {"1 ${a} 2 ${b}${c}", VALUE, "1 ", VARIABLE, "a", VALUE, " 2 ", VARIABLE, "b", VARIABLE, "c"},
-        {"${a}${b} one ${two} three", VARIABLE, "a", VARIABLE, "b", VALUE, " one ", VARIABLE, "two", VALUE, " three"},
-        {"${a}${b}one${two}three", VARIABLE, "a", VARIABLE, "b", VALUE, "one", VARIABLE, "two", VALUE, "three"},
-        {"${", VALUE, "${"},
-        {"${foo bar", VALUE, "${foo bar"},
-        {"${${ foo bar}", VARIABLE, "${ foo bar"},
-    };
+    private static final String[][]       tests =
+            {
+                    {"one two three", VALUE, "one two three"},
+                    {"one ${two} three", VALUE, "one ", VARIABLE, "two", VALUE, " three"},
+                    {"${two}", VARIABLE, "two"},
+                    {"${a}b", VARIABLE, "a", VALUE, "b"},
+                    {"a${b}", VALUE, "a", VARIABLE, "b"},
+                    {"", VALUE, ""},
+                    {"1 ${a} 2 ${b}", VALUE, "1 ", VARIABLE, "a", VALUE, " 2 ", VARIABLE, "b"},
+                    {"1 ${a} 2 ${b}${c}", VALUE, "1 ", VARIABLE, "a", VALUE, " 2 ", VARIABLE, "b", VARIABLE, "c"},
+                    {"${a}${b} one ${two} three", VARIABLE, "a", VARIABLE, "b", VALUE, " one ", VARIABLE, "two", VALUE, " three"},
+                    {"${a}${b}one${two}three", VARIABLE, "a", VARIABLE, "b", VALUE, "one", VARIABLE, "two", VALUE, "three"},
+                    {"${", VALUE, "${"},
+                    {"${foo bar", VALUE, "${foo bar"},
+                    {"${${ foo bar}", VARIABLE, "${ foo bar"},
+            };
 
     @Test
     public void runTests()

@@ -33,7 +33,7 @@ import com.netflix.governator.lifecycle.LifecycleManager;
  * @author elandau
  */
 public class StandaloneRunnerModule implements BootstrapModule {
-    private static Logger LOG = LoggerFactory.getLogger(StandaloneRunnerModule.class);
+    private static Logger log = LoggerFactory.getLogger(StandaloneRunnerModule.class);
 
     /**
      * This builder simplifies creation of the module in main()
@@ -109,30 +109,31 @@ public class StandaloneRunnerModule implements BootstrapModule {
         @PostConstruct
         public void init() {
             try {
-                LOG.info("Starting application");
+                log.info("Starting application");
                 manager.start();
 
-                if (mainClass != null)
+                if (mainClass != null) {
                     injector.getInstance(mainClass);
+                }
 
                 final ExecutorService executor = Executors.newSingleThreadExecutor(new ThreadFactoryBuilder().setNameFormat("GovernatorStandaloneTerminator-%d").build());
                 executor.execute(new Runnable() {
                         @Override
                         public void run() {
-                            LOG.info("Waiting for terminate event");
+                            log.info("Waiting for terminate event");
                             try {
                                 terminateEvent.await();
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                             }
-                            LOG.info("Terminating application");
+                            log.info("Terminating application");
                             manager.close();
                             executor.shutdown();
                         }
                     });
             }
             catch (Exception e) {
-                LOG.error("Error executing application ", e);
+                log.error("Error executing application ", e);
             }
         }
     }
@@ -173,9 +174,10 @@ public class StandaloneRunnerModule implements BootstrapModule {
             binder.bind(new TypeLiteral<List<String>>() {}).annotatedWith(Main.class).toInstance(args);
         }
 
-        if (terminateEvent == null)
+        if (terminateEvent == null) {
             binder.bind(TerminationEvent.class).annotatedWith(Main.class).to(BlockingTerminationEvent.class);
-        else
+        } else {
             binder.bind(TerminationEvent.class).annotatedWith(Main.class).toInstance(terminateEvent);
+        }
     }
 }

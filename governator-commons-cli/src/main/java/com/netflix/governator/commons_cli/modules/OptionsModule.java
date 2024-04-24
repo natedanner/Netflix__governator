@@ -71,9 +71,9 @@ import com.netflix.governator.commons_cli.providers.StringOptionProvider;
  */
 public abstract class OptionsModule extends AbstractModule {
     private static final Logger LOG = LoggerFactory.getLogger(OptionsModule.class);
-    
-    private List<OptionBuilder> builders = Lists.newArrayList();
-    private boolean parserIsBound = false;
+
+    private final List<OptionBuilder> builders = Lists.newArrayList();
+    private boolean parserIsBound;
     
     /**
      * Non-static version of commons CLI OptionBuilder

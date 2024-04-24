@@ -17,7 +17,7 @@ import javax.inject.Provider;
  */
 public abstract class SingletonProvider<T> implements Provider<T> {
     private volatile T obj;
-    private Object lock = new Object();
+    private final Object lock = new Object();
     
     /**
      * Return the caches instance or call the internal {@link create} method

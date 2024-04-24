@@ -53,8 +53,9 @@ public class JavaClasspath
             @Override protected Class<?> findClass(String name) throws ClassNotFoundException
             {
                 byte[] b = classpath.get(name);
-                if(b == null)
+                if (b == null) {
                     throw new ClassNotFoundException(name);
+                }
                 return defineClass(name, b, 0, b.length);
             }
 
@@ -62,8 +63,9 @@ public class JavaClasspath
             protected Enumeration<URL> findResources(String name) throws IOException {
                 Set<URL> matchingJars = new HashSet<>();
                 for (Map.Entry<String, File> classToJar : jarByClass.entrySet()) {
-                    if(classToJar.getKey().startsWith(name))
+                    if (classToJar.getKey().startsWith(name)) {
                         matchingJars.add(classToJar.getValue().toURI().toURL());
+                    }
                 }
                 return Collections.enumeration(matchingJars);
             }
@@ -95,12 +97,14 @@ public class JavaClasspath
 
         nextConstructor: for (Constructor<?> constructor : clazz.getDeclaredConstructors())
         {
-            if(args.length != constructor.getParameterTypes().length)
+            if (args.length != constructor.getParameterTypes().length) {
                 continue;
+            }
             int i = 0;
             for (Class type : constructor.getParameterTypes())
-                if(!type.isAssignableFrom(args[i++].getClass()))
+                if (!type.isAssignableFrom(args[i++].getClass())) {
                     continue nextConstructor;
+                }
 
             constructor.setAccessible(true);
             try
@@ -118,7 +122,7 @@ public class JavaClasspath
 
     private static class InMemoryJavaFileObject extends SimpleJavaFileObject
     {
-        private String contents = null;
+        private String contents;
 
         public InMemoryJavaFileObject(String contents)
         {
@@ -132,7 +136,7 @@ public class JavaClasspath
         }
     }
 
-    private static DiagnosticListener<JavaFileObject> diagnosticListener = new DiagnosticListener<JavaFileObject>()
+    private static final DiagnosticListener<JavaFileObject> diagnosticListener = new DiagnosticListener<JavaFileObject>()
     {
         @Override
         public void report(Diagnostic<? extends JavaFileObject> diagnostic)
@@ -221,10 +225,11 @@ public class JavaClasspath
         {
             for (Path entry : stream)
             {
-                if (Files.isDirectory(entry))
+                if (Files.isDirectory(entry)) {
                     files.addAll(recurseListFiles(entry));
-                else
+                } else {
                     files.add(entry);
+                }
             }
         }
         return files;

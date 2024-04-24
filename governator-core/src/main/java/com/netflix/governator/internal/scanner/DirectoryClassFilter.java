@@ -41,9 +41,9 @@ public class DirectoryClassFilter {
 
     public List<String> filesInPackage(URL url, String basePackage) {
         File dir = ClasspathUrlDecoder.toFile(url);
-        List<String> classNames = new ArrayList<String>();
+        List<String> classNames = new ArrayList<>();
         if (dir.isDirectory()) {
-            scanDir(dir, classNames, (basePackage.length() > 0) ? (basePackage + ".") : "");
+            scanDir(dir, classNames, basePackage.length() > 0 ? (basePackage + ".") : "");
         }
         return classNames;
     }

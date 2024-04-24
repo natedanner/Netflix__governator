@@ -140,7 +140,7 @@ public class AutoBindSingletonAnnotatedClassScanner implements AnnotatedClassSca
         Class<?> annotationBaseClass = annotation.baseClass();
         Preconditions.checkState((annotationValue == Void.class) || (annotationBaseClass == Void.class), "@AutoBindSingleton cannot have both value and baseClass set");
 
-        return (annotationBaseClass != Void.class) ? annotationBaseClass : annotationValue;
+        return annotationBaseClass != Void.class ? annotationBaseClass : annotationValue;
     }
 
     private Object searchForBaseClass(Class<?> clazz, Class<?> annotationBaseClass, Set<Object> usedSet) {

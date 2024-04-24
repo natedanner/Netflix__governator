@@ -14,7 +14,7 @@ import com.google.inject.spi.StaticInjectionRequest;
 import com.netflix.governator.guice.ModuleTransformer;
 
 public class WarnAboutStaticInjections implements ModuleTransformer {
-    private static Logger LOG = LoggerFactory.getLogger(WarnAboutStaticInjections.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WarnAboutStaticInjections.class);
     
     @Override
     public Collection<Module> call(Collection<Module> modules) {

@@ -16,8 +16,8 @@ import com.netflix.governator.spi.LifecycleListener;
  * Adds support for detection and invocation of {@link LifecycleListener} instances. 
  */
 public final class LifecycleListenerModule extends AbstractModule {
-    
-    private LifecycleListenerProvisionListener provisionListener = new LifecycleListenerProvisionListener();
+
+    private final LifecycleListenerProvisionListener provisionListener = new LifecycleListenerProvisionListener();
 
     @Override
     protected void configure() {

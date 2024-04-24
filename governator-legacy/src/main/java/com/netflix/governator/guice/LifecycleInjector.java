@@ -89,13 +89,13 @@ public class LifecycleInjector
     private final List<Module> modules;
     private final Collection<Class<?>> ignoreClasses;
     private final boolean ignoreAllClasses;
-    private boolean requireExplicitBindings;
+    private final boolean requireExplicitBindings;
     private final LifecycleManager lifecycleManager;
     private final Injector injector;
     private final Stage stage;
     private final LifecycleInjectorMode mode;
-    private Set<PostInjectorAction> actions;
-    private Set<ModuleTransformer> transformers;
+    private final Set<PostInjectorAction> actions;
+    private final Set<ModuleTransformer> transformers;
 
     /**
      * Create a new LifecycleInjector builder
@@ -166,8 +166,9 @@ public class LifecycleInjector
             @SuppressWarnings({ "unchecked", "rawtypes" })
             @Override
             protected void configure() {
-                if (externalBindings != null)
+                if (externalBindings != null) {
                     install(externalBindings);
+                }
                 
                 Multibinder<BootstrapModule> bootstrapModules = Multibinder.newSetBinder(binder(), BootstrapModule.class);
                 Multibinder<LifecycleInjectorBuilderSuite> suites = Multibinder.newSetBinder(binder(), LifecycleInjectorBuilderSuite.class);
@@ -199,7 +200,7 @@ public class LifecycleInjector
                     	}
                     	// This is a bootstrap module
                     	if (!bootstrap.bootstrap().equals(Bootstrap.NullBootstrapModule.class)) {
-                    		Preconditions.checkState(added==false, "%s already added as a LifecycleInjectorBuilderSuite", bootstrap.annotationType().getName());
+                    		Preconditions.checkState(!added, "%s already added as a LifecycleInjectorBuilderSuite", bootstrap.annotationType().getName());
                     		added = true;
                             LOG.info("Adding BootstrapModule {}", bootstrap.bootstrap());
 	                        bootstrapModules
@@ -211,7 +212,7 @@ public class LifecycleInjector
                     	}
                     	// This is a plain guice module
                     	if (!bootstrap.module().equals(Bootstrap.NullModule.class)) {
-                    		Preconditions.checkState(added==false, "%s already added as a BootstrapModule", bootstrap.annotationType().getName());
+                    		Preconditions.checkState(!added, "%s already added as a BootstrapModule", bootstrap.annotationType().getName());
                     		added = true;
                             LOG.info("Adding Module {}", bootstrap.bootstrap());
 	                        builder.withAdditionalModuleClasses(bootstrap.module());
@@ -413,11 +414,11 @@ public class LifecycleInjector
  
     LifecycleInjector(LifecycleInjectorBuilderImpl builder)
     {
-        this.scanner = (builder.getClasspathScanner() != null) 
+        this.scanner = builder.getClasspathScanner() != null 
                 ? builder.getClasspathScanner() 
                 : createStandardClasspathScanner(builder.isDisableAutoBinding() ? Collections.<String>emptyList() : builder.getBasePackages());
                 
-        AtomicReference<LifecycleManager> lifecycleManagerRef = new AtomicReference<LifecycleManager>();
+        AtomicReference<LifecycleManager> lifecycleManagerRef = new AtomicReference<>();
         InternalBootstrapModule internalBootstrapModule = new InternalBootstrapModule(
                 ImmutableList.<BootstrapModule>builder()
                     .addAll(builder.getBootstrapModules())
@@ -488,7 +489,7 @@ public class LifecycleInjector
             }
         };
 
-        AtomicReference<LifecycleManager> lifecycleManagerAtomicReference = new AtomicReference<LifecycleManager>(lifecycleManager);
+        AtomicReference<LifecycleManager> lifecycleManagerAtomicReference = new AtomicReference<>(lifecycleManager);
         InternalLifecycleModule internalLifecycleModule = new InternalLifecycleModule(lifecycleManagerAtomicReference);
 
         List<Module> localModules = Lists.newArrayList(modules);

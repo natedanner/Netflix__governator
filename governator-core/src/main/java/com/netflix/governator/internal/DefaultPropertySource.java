@@ -26,8 +26,9 @@ public final class DefaultPropertySource extends AbstractPropertySource {
         String value = System.getProperty(key);
         if (value == null) {
             value = System.getenv(key);
-            if (value == null)
+            if (value == null) {
                 return defaultValue;
+            }
         }
         return value;
     }

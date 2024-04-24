@@ -22,7 +22,7 @@ import com.google.inject.Injector;
 import javax.inject.Provider;
 import com.google.inject.Scope;
 
-class ProviderBinderUtil
+final class ProviderBinderUtil
 {
     static void      bind(Binder binder, Class<? extends Provider> clazz, Scope scope)
     {

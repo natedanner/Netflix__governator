@@ -20,7 +20,7 @@ public final class SimpleProvisionMetrics implements ProvisionMetrics {
         Stack<Entry> stack = new Stack<>();
         
         void accept(Visitor visitor) {
-            children.forEach(entry -> visitor.visit(entry));
+            children.forEach(visitor::visit);
         }
         
         void push(Entry entry) {

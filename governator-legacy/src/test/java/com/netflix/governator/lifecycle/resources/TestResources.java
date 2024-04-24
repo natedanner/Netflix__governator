@@ -37,7 +37,7 @@ public class TestResources extends LifecycleInjectorBuilderProvider
                     return "a";
                 }
 
-                if ( resource.name().equals("overrideInt") )
+                if ( "overrideInt".equals(resource.name()) )
                 {
                     return BigInteger.valueOf(2);
                 }
@@ -47,12 +47,12 @@ public class TestResources extends LifecycleInjectorBuilderProvider
                     return new Point(3, 4);
                 }
 
-                if ( resource.name().equals("overrideRect") )
+                if ( "overrideRect".equals(resource.name()) )
                 {
                     return new Rectangle(5, 6);
                 }
 
-                if ( resource.name().equals("classResource") )
+                if ( "classResource".equals(resource.name()) )
                 {
                     classResourceCount.incrementAndGet();
                     return 7.8;

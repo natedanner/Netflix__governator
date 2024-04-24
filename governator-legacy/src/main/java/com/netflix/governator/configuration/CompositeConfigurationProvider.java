@@ -47,7 +47,7 @@ public class CompositeConfigurationProvider implements ConfigurationProvider
      */
     public CompositeConfigurationProvider(Collection<ConfigurationProvider> providers)
     {
-        this.providers = new CopyOnWriteArrayList<ConfigurationProvider>(providers);
+        this.providers = new CopyOnWriteArrayList<>(providers);
     }
 
     @VisibleForTesting

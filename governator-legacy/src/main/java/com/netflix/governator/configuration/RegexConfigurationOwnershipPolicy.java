@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  */
 public class RegexConfigurationOwnershipPolicy implements ConfigurationOwnershipPolicy
 {
-    private Pattern pattern;
+    private final Pattern pattern;
 
     public RegexConfigurationOwnershipPolicy(String regex)
     {

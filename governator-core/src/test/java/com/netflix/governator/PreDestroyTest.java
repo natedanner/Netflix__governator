@@ -26,7 +26,7 @@ public class PreDestroyTest {
     private static final int GC_SLEEP_TIME = 100;
 
     private static class Foo {
-        private volatile boolean shutdown = false;
+        private volatile boolean shutdown;
         
         Foo() {
             System.out.println("Foo constructed: " + this);
@@ -49,7 +49,7 @@ public class PreDestroyTest {
 
     @ThreadLocalScoped
     private static class AnnotatedFoo {
-        private volatile boolean shutdown = false;
+        private volatile boolean shutdown;
         
         @SuppressWarnings("unused")
         AnnotatedFoo() {
@@ -174,7 +174,7 @@ public class PreDestroyTest {
     
     
     private static class EagerBean {
-        volatile boolean shutdown = false;
+        volatile boolean shutdown;
         SingletonBean singletonInstance;
         @Inject
         public EagerBean(SingletonBean singletonInstance) {
@@ -191,8 +191,8 @@ public class PreDestroyTest {
     
     @Singleton
     private static class SingletonBean {
-        volatile boolean eagerShutdown = false;
-        boolean shutdown = false;
+        volatile boolean eagerShutdown;
+        boolean shutdown;
         
         @PreDestroy
         public void shutdown() {

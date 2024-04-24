@@ -11,7 +11,7 @@ import com.netflix.governator.guice.runner.TerminationEvent;
  */
 @Singleton
 public class BlockingTerminationEvent implements TerminationEvent {
-    private volatile boolean isTerminated = false;
+    private volatile boolean isTerminated;
     
     @Override
     public synchronized void await() throws InterruptedException {

@@ -37,7 +37,7 @@ import com.netflix.governator.configuration.Property;
 
 class ConfigurationProcessor
 {
-    private final static Logger log = LoggerFactory.getLogger(ConfigurationProcessor.class);
+    private static final Logger log = LoggerFactory.getLogger(ConfigurationProcessor.class);
     private final ConfigurationProvider configurationProvider;
     private final ConfigurationDocumentation configurationDocumentation;
 
@@ -153,7 +153,7 @@ class ConfigurationProcessor
                 }
                 else
                 {
-                    documentationValue = String.valueOf(documentationValue);
+                    documentationValue = documentationValue;
                 }
             }
             else

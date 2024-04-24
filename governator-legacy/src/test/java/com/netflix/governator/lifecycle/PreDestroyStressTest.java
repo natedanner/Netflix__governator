@@ -71,8 +71,8 @@ public class PreDestroyStressTest {
         }
 
         private String name;
-        private volatile boolean postConstructed = false;
-        private volatile boolean preDestroyed = false;
+        private volatile boolean postConstructed;
+        private volatile boolean preDestroyed;
         private byte[] bulk;
         private final String toString;
 

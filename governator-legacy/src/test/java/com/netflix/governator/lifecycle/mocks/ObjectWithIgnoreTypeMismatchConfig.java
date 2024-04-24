@@ -22,7 +22,7 @@ import java.util.Date;
 public class ObjectWithIgnoreTypeMismatchConfig
 {
     @Configuration(value = "test.b", documentation = "this is a boolean", ignoreTypeMismatch = true)
-    public boolean aBool = false;
+    public boolean aBool;
 
     @Configuration(value = "test.i", ignoreTypeMismatch = true)
     public int anInt = 1;

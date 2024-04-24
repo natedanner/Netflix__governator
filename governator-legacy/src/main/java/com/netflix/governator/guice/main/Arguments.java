@@ -8,7 +8,7 @@ package com.netflix.governator.guice.main;
  *
  */
 public class Arguments {
-    private String[] args;
+    private final String[] args;
     
     public Arguments(String[] args) {
         this.args = args;

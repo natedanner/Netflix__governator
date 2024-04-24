@@ -62,7 +62,7 @@ public class ConfigurationLifecycleFeature implements LifecycleFeature {
     public List<LifecycleAction> getActionsForType(final Class<?> type) {
         final LifecycleMethods methods = new LifecycleMethods(type);
         if (methods.annotatedFields(Configuration.class).length > 0) {
-            return Arrays.<LifecycleAction>asList(new LifecycleAction() {
+            return Arrays.asList(new LifecycleAction() {
                 @Override
                 public void call(Object obj) throws Exception {
                     if (mapper == null) {

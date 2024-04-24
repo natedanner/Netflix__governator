@@ -44,7 +44,7 @@ public class TestConfiguration
 {
 
     private static final String MAP_OF_MAPS_STRING = "{\"foo\": {\"bar\": \"baz\"}}";
-    private static final Map<String, Map<String, String>> MAP_OF_MAPS_OBJ = new HashMap<String, Map<String, String>>();
+    private static final Map<String, Map<String, String>> MAP_OF_MAPS_OBJ = new HashMap<>();
     static {
         MAP_OF_MAPS_OBJ.put("foo", new HashMap<String, String>());
         MAP_OF_MAPS_OBJ.get("foo").put("bar", "baz");
@@ -180,7 +180,7 @@ public class TestConfiguration
     @Test
     public void     testConfigTypeMismatchWithArchaius() throws Exception
     {
-        Map<String, String> properties = new HashMap<String, String>();
+        Map<String, String> properties = new HashMap<>();
         properties.put("test.b", "20");
         properties.put("test.i", "foo");
         properties.put("test.l", "bar");
@@ -208,9 +208,9 @@ public class TestConfiguration
         manager.start();
 
         Assert.assertEquals(obj.aDynamicBool.get(), Boolean.TRUE);
-        Assert.assertEquals(obj.anDynamicInt.get(), new Integer(1));
-        Assert.assertEquals(obj.anDynamicInt2.get(), new Integer(1));
-        Assert.assertEquals(obj.aDynamicLong.get(), new Long(2L));
+        Assert.assertEquals(obj.anDynamicInt.get(), Integer.valueOf(1));
+        Assert.assertEquals(obj.anDynamicInt2.get(), Integer.valueOf(1));
+        Assert.assertEquals(obj.aDynamicLong.get(), Long.valueOf(2L));
         Assert.assertEquals(obj.aDynamicDouble.get(), 3.4, 0);
         Assert.assertEquals(obj.aDynamicString.get(), "a is a");
         Assert.assertEquals(obj.aDynamicString2.get(), "a is a");
@@ -228,8 +228,8 @@ public class TestConfiguration
         ConfigurationManager.getConfigInstance().setProperty("test.dynamic.mapOfMaps", MAP_OF_MAPS_STRING);
 
         Assert.assertEquals(obj.aDynamicBool.get(), Boolean.FALSE);
-        Assert.assertEquals(obj.anDynamicInt.get(), new Integer(101));
-        Assert.assertEquals(obj.aDynamicLong.get(), new Long(201L));
+        Assert.assertEquals(obj.anDynamicInt.get(), Integer.valueOf(101));
+        Assert.assertEquals(obj.aDynamicLong.get(), Long.valueOf(201L));
         Assert.assertEquals(obj.aDynamicDouble.get(), 301.4, 0);
         Assert.assertEquals(obj.aDynamicString.get(), "a is b");
         Assert.assertEquals(obj.aDynamicObj.get(), Arrays.asList(1, 2, 3, 4));

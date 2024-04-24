@@ -22,10 +22,10 @@ import javax.annotation.PreDestroy;
 import junit.framework.Assert;
 
 public class TestStandaloneApplication {
-    private static Logger LOG = LoggerFactory.getLogger(TestStandaloneApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TestStandaloneApplication.class);
     
-    private final static AtomicBoolean initCalled = new AtomicBoolean();
-    private final static AtomicBoolean shutdownCalled = new AtomicBoolean();
+    private static final AtomicBoolean initCalled = new AtomicBoolean();
+    private static final AtomicBoolean shutdownCalled = new AtomicBoolean();
     
     public static class SomeSingleton {
         @PostConstruct
@@ -78,7 +78,7 @@ public class TestStandaloneApplication {
 //
 //    }
     
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         final TerminationEvent event = new SelfDestructingTerminationEvent(1, TimeUnit.SECONDS);
         LifecycleInjector.builder()
             // Example of a singleton that will be created

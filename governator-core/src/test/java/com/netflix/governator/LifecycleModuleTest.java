@@ -42,7 +42,7 @@ public class LifecycleModuleTest {
 
     }
 
-    private static enum Events {
+    private enum Events {
         Injected, Initialized, Destroyed, Started, Stopped, Error
     }
 

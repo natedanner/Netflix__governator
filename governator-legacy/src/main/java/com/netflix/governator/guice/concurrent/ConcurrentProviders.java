@@ -111,7 +111,7 @@ public class ConcurrentProviders {
                 }
                 if (injectionPoint != null) {
                     List<Dependency<?>> deps = injectionPoint.getDependencies();
-                    if (deps.size() > 0) {
+                    if (!deps.isEmpty()) {
                         Constructor<?> constructor = (Constructor<?>)injectionPoint.getMember();
                         // One thread for each dependency
                         ExecutorService executor = Executors.newCachedThreadPool(

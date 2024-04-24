@@ -19,7 +19,7 @@ public final class ProvisionMetricsModule extends AbstractModule {
     private static class MetricsProvisionListener implements ProvisionListener, com.netflix.governator.spi.LifecycleListener {
         private ProvisionMetrics metrics;
         
-        private boolean doneLoading = false;
+        private boolean doneLoading;
         
         @Inject
         public static void initialize(MetricsProvisionListener listener, ProvisionMetrics metrics)  {
@@ -60,8 +60,8 @@ public final class ProvisionMetricsModule extends AbstractModule {
             doneLoading = true;
         }
     }
-    
-    private MetricsProvisionListener listener = new MetricsProvisionListener();
+
+    private final MetricsProvisionListener listener = new MetricsProvisionListener();
     
     @Override
     protected void configure() {

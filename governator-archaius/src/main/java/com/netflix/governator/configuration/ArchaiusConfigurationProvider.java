@@ -38,7 +38,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     private final DynamicPropertyFactory propertyFactory;
     private final ConfigurationOwnershipPolicy ownershipPolicy;
 
-    public static class Builder
+    public static final class Builder
     {
         private Map<String, String> variableValues = Maps.newHashMap();
         private AbstractConfiguration configurationManager = ConfigurationManager.getConfigInstance();
@@ -140,7 +140,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     @Deprecated
     public ArchaiusConfigurationProvider()
     {
-        this(new HashMap<String, String>());
+        this(new HashMap<>());
     }
 
     @Deprecated
@@ -228,7 +228,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     @Override
     public Property<Boolean> getBooleanProperty(ConfigurationKey key, Boolean defaultValue)
     {
-        return new PropertyWrapperProperty<Boolean>(
+        return new PropertyWrapperProperty<>(
             propertyFactory.getBooleanProperty(
                 key.getKey(variableValues),
                 defaultValue));
@@ -237,7 +237,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     @Override
     public Property<Integer> getIntegerProperty(ConfigurationKey key, Integer defaultValue)
     {
-        return new PropertyWrapperProperty<Integer>(
+        return new PropertyWrapperProperty<>(
             propertyFactory.getIntProperty(
                 key.getKey(variableValues),
                 defaultValue));
@@ -246,7 +246,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     @Override
     public Property<Long> getLongProperty(ConfigurationKey key, Long defaultValue)
     {
-        return new PropertyWrapperProperty<Long>(
+        return new PropertyWrapperProperty<>(
             propertyFactory.getLongProperty(
                 key.getKey(variableValues),
                 defaultValue));
@@ -255,7 +255,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     @Override
     public Property<Double> getDoubleProperty(ConfigurationKey key, Double defaultValue)
     {
-        return new PropertyWrapperProperty<Double>(
+        return new PropertyWrapperProperty<>(
             propertyFactory.getDoubleProperty(
                 key.getKey(variableValues),
                 defaultValue));
@@ -264,7 +264,7 @@ public class ArchaiusConfigurationProvider extends AbstractObjectConfigurationPr
     @Override
     public Property<String> getStringProperty(ConfigurationKey key, String defaultValue)
     {
-        return new PropertyWrapperProperty<String>(
+        return new PropertyWrapperProperty<>(
             propertyFactory.getStringProperty(
                 key.getKey(variableValues),
                 defaultValue));

@@ -286,8 +286,8 @@ public class TestLifecycleInjector {
   @Singleton
   private static class PreDestroyOnceImpl implements PreDestroyOnce {
 
-    private boolean closed = false;
-    private int counter = 0;
+    private boolean closed;
+    private int counter;
 
     @Override
     public boolean isClosed() {
@@ -308,8 +308,8 @@ public class TestLifecycleInjector {
 
   private static class PreDestroyOnceProtoImpl implements PreDestroyOnce {
 
-    private boolean closed = false;
-    private int counter = 0;
+    private boolean closed;
+    private int counter;
 
     @Override
     public boolean isClosed() {

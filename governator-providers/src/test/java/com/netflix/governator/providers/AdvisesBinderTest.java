@@ -28,47 +28,47 @@ public class AdvisesBinderTest {
     
     @Test
     public void adviseWithAdvice() {
-        TypeLiteral<List<String>> LIST_TYPE_LITERAL =  new TypeLiteral<List<String>>() {};
+        TypeLiteral<List<String>> listTypeLiteral =  new TypeLiteral<List<String>>() {};
         
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
                 install(AdvisableAnnotatedMethodScanner.asModule());
                 
-                AdvisesBinder.bind(binder(), LIST_TYPE_LITERAL).toInstance(new ArrayList<>());
-                AdvisesBinder.bindAdvice(binder(), LIST_TYPE_LITERAL, 0).to(AdviseList.class);
+                AdvisesBinder.bind(binder(), listTypeLiteral).toInstance(new ArrayList<>());
+                AdvisesBinder.bindAdvice(binder(), listTypeLiteral, 0).to(AdviseList.class);
             }
         });
         
-        List<String> list = injector.getInstance(Key.get(LIST_TYPE_LITERAL));
+        List<String> list = injector.getInstance(Key.get(listTypeLiteral));
         Assert.assertEquals(Arrays.asList("a"), list);
     }
 
     @Test
     public void provisionWithoutAdviseDoesntBlowUp() {
-        TypeLiteral<List<String>> LIST_TYPE_LITERAL =  new TypeLiteral<List<String>>() {};
+        TypeLiteral<List<String>> listTypeLiteral =  new TypeLiteral<List<String>>() {};
         
         Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
                 install(AdvisableAnnotatedMethodScanner.asModule());
                 
-                AdvisesBinder.bindAdvice(binder(), LIST_TYPE_LITERAL, 0).to(AdviseList.class);
+                AdvisesBinder.bindAdvice(binder(), listTypeLiteral, 0).to(AdviseList.class);
             }
         });
     }
     
     @Test
     public void adviseWithoutQualifier() {
-        TypeLiteral<List<String>> LIST_TYPE_LITERAL =  new TypeLiteral<List<String>>() {};
+        TypeLiteral<List<String>> listTypeLiteral =  new TypeLiteral<List<String>>() {};
         
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
                 install(AdvisableAnnotatedMethodScanner.asModule());
                 
-                AdvisesBinder.bind(binder(), LIST_TYPE_LITERAL).toInstance(new ArrayList<>());
-                AdvisesBinder.bindAdvice(binder(), LIST_TYPE_LITERAL, 0).to(AdviseList.class);
+                AdvisesBinder.bind(binder(), listTypeLiteral).toInstance(new ArrayList<>());
+                AdvisesBinder.bindAdvice(binder(), listTypeLiteral, 0).to(AdviseList.class);
             }
             
             @Advises
@@ -81,21 +81,21 @@ public class AdvisesBinderTest {
             
         });
         
-        List<String> list = injector.getInstance(Key.get(LIST_TYPE_LITERAL));
+        List<String> list = injector.getInstance(Key.get(listTypeLiteral));
         Assert.assertEquals(Arrays.asList("a", "b"), list);
     }
     
     @Test
     public void adviseWithQualifier() {
-        TypeLiteral<List<String>> LIST_TYPE_LITERAL =  new TypeLiteral<List<String>>() {};
+        TypeLiteral<List<String>> listTypeLiteral =  new TypeLiteral<List<String>>() {};
         
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
                 install(AdvisableAnnotatedMethodScanner.asModule());
                 
-                AdvisesBinder.bind(binder(), LIST_TYPE_LITERAL, Names.named("test")).toInstance(new ArrayList<>());
-                AdvisesBinder.bindAdvice(binder(), LIST_TYPE_LITERAL, Names.named("test"), 0).to(AdviseList.class);
+                AdvisesBinder.bind(binder(), listTypeLiteral, Names.named("test")).toInstance(new ArrayList<>());
+                AdvisesBinder.bindAdvice(binder(), listTypeLiteral, Names.named("test"), 0).to(AdviseList.class);
             }
             
             @Advises
@@ -109,24 +109,24 @@ public class AdvisesBinderTest {
             
         });
         
-        List<String> list = injector.getInstance(Key.get(LIST_TYPE_LITERAL, Names.named("test")));
+        List<String> list = injector.getInstance(Key.get(listTypeLiteral, Names.named("test")));
         Assert.assertEquals(Arrays.asList("a", "b"), list);
     }
     
     @Test
     public void adviseNoBleedingBetweenQualifiers() {
-        TypeLiteral<List<String>> LIST_TYPE_LITERAL =  new TypeLiteral<List<String>>() {};
+        TypeLiteral<List<String>> listTypeLiteral =  new TypeLiteral<List<String>>() {};
         
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
                 install(AdvisableAnnotatedMethodScanner.asModule());
                 
-                AdvisesBinder.bind(binder(), LIST_TYPE_LITERAL, Names.named("test")).toInstance(new ArrayList<>());
-                AdvisesBinder.bindAdvice(binder(), LIST_TYPE_LITERAL, Names.named("test"), 0).to(AdviseList.class);
+                AdvisesBinder.bind(binder(), listTypeLiteral, Names.named("test")).toInstance(new ArrayList<>());
+                AdvisesBinder.bindAdvice(binder(), listTypeLiteral, Names.named("test"), 0).to(AdviseList.class);
                 
-                AdvisesBinder.bind(binder(), LIST_TYPE_LITERAL).toInstance(new ArrayList<>());
-                AdvisesBinder.bindAdvice(binder(), LIST_TYPE_LITERAL, 0).to(AdviseList.class);
+                AdvisesBinder.bind(binder(), listTypeLiteral).toInstance(new ArrayList<>());
+                AdvisesBinder.bindAdvice(binder(), listTypeLiteral, 0).to(AdviseList.class);
             }
             
             @Advises
@@ -149,10 +149,10 @@ public class AdvisesBinderTest {
         });
         
         List<String> list;
-        list = injector.getInstance(Key.get(LIST_TYPE_LITERAL, Names.named("test")));
+        list = injector.getInstance(Key.get(listTypeLiteral, Names.named("test")));
         Assert.assertEquals(Arrays.asList("a", "qualified"), list);
         
-        list = injector.getInstance(Key.get(LIST_TYPE_LITERAL));
+        list = injector.getInstance(Key.get(listTypeLiteral));
         Assert.assertEquals(Arrays.asList("a", "not qualified"), list);
     }
 }

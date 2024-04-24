@@ -103,8 +103,7 @@ public final class PreDestroyLifecycleFeature implements LifecycleFeature {
         private final String description;
 
         private AutoCloseableLifecycleAction(Class<? extends AutoCloseable> clazz) {
-            this.description = new StringBuilder().append("AutoCloseable@").append(System.identityHashCode(this)).append("[").append(clazz.getName()).append(".")
-                    .append("close()").append("]").toString();
+            this.description = "AutoCloseable@" + System.identityHashCode(this) + "[" + clazz.getName() + "." + "close()" + "]";
         }
 
         @Override

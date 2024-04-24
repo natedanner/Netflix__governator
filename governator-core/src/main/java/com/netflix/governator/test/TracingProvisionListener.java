@@ -16,9 +16,9 @@ import com.google.inject.spi.ProvisionListener;
  * </code>
  *      
  */
-public class TracingProvisionListener implements ProvisionListener {
+public final class TracingProvisionListener implements ProvisionListener {
     
-    private int indent = 0;
+    private int indent;
     
     private final String prefix;
     private final int indentAmount;
@@ -26,7 +26,7 @@ public class TracingProvisionListener implements ProvisionListener {
     private final BindingFormatter afterFormatter;
     private final PrintStream stream;
 
-    private ErrorFormatter errorFormatter;
+    private final ErrorFormatter errorFormatter;
     
     private static final BindingFormatter EMPTY_BINDING_FORMATTER = new BindingFormatter() {
         @Override

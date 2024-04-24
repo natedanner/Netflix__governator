@@ -101,7 +101,7 @@ class ResourceMapper {
         return new Resource() {
             @Override
             public String name() {
-                return (resource.name().length() == 0) ? siteName : resource.name();
+                return resource.name().length() == 0 ? siteName : resource.name();
             }
 
             /**
@@ -113,7 +113,7 @@ class ResourceMapper {
 
             @Override
             public Class<?> type() {
-                return (resource.type() == Object.class) ? siteType : resource.type();
+                return resource.type() == Object.class ? siteType : resource.type();
             }
 
             @Override

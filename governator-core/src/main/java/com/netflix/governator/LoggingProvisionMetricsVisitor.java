@@ -12,7 +12,7 @@ public class LoggingProvisionMetricsVisitor implements Visitor {
     private static final Logger LOG = LoggerFactory.getLogger(LoggingProvisionMetricsVisitor.class);
 
     int level = 1;
-    int elementCount = 0;
+    int elementCount;
     
     @Override
     public void visit(Element entry) {

@@ -41,7 +41,7 @@ import com.netflix.governator.guice.LifecycleInjector;
  * @author elandau
  */
 public class BootstrapMain {
-    public static void main(final String args[]) {
+    public static void main(final String[] args) {
         try {
             Class<?> mainClass = Class.forName(args[0]);
             LifecycleInjector.bootstrap(mainClass, new AbstractModule() {

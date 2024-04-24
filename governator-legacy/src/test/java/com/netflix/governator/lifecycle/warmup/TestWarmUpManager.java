@@ -244,8 +244,8 @@ public class TestWarmUpManager extends LifecycleInjectorBuilderProvider {
 
         assertSingleExecution(recorder);
         Assert.assertEquals(recorder.getInterruptions().size(), 0);
-        Assert.assertTrue(recorder.getRecordings().indexOf("A") >= 0);
-        Assert.assertTrue(recorder.getRecordings().indexOf("B") >= 0);
+        Assert.assertTrue(recorder.getRecordings().contains("A"));
+        Assert.assertTrue(recorder.getRecordings().contains("B"));
     }
 
     private void assertSingleExecution(Recorder recorder) {

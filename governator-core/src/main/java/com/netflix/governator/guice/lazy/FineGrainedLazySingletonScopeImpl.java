@@ -50,7 +50,7 @@ class FineGrainedLazySingletonScopeImpl extends AbstractScope
     private static class LockRecord
     {
         private final Object        lock = new Object();
-        private int                 useCount = 0;
+        private int                 useCount;
     }
 
     public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator)
@@ -86,7 +86,7 @@ class FineGrainedLazySingletonScopeImpl extends AbstractScope
                                     return provided;
                                 }
 
-                                Object providedOrSentinel = (provided == null) ? NULL : provided;
+                                Object providedOrSentinel = provided == null ? NULL : provided;
                                 if ( (instance != null) && (instance != providedOrSentinel) )
                                 {
                                     throw new ProvisionException("Provider was reentrant while creating a singleton");
@@ -105,7 +105,7 @@ class FineGrainedLazySingletonScopeImpl extends AbstractScope
                 Object localInstance = instance;
                 // This is safe because instance has type T or is equal to NULL
                 @SuppressWarnings({"unchecked", "UnnecessaryLocalVariable"})
-                T returnedInstance = (localInstance != NULL) ? (T) localInstance : null;
+                T returnedInstance = localInstance != NULL ? (T) localInstance : null;
                 return returnedInstance;
             }
 

@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Map;
 
-public class KeyParser
+public final class KeyParser
 {
     public static List<ConfigurationKeyPart> parse(String raw) {
         return parse(raw, null);
@@ -73,7 +73,7 @@ public class KeyParser
             parts.add(new ConfigurationKeyPart(raw.substring(caret), false));
         }
 
-        if ( parts.size() == 0 )
+        if ( parts.isEmpty() )
         {
             parts.add(new ConfigurationKeyPart("", false));
         }

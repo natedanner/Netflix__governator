@@ -13,7 +13,7 @@ public class ClasspathUrlDecoder {
         }
         String path = url.getFile();
         File dir = new File(decode(path));
-        if (dir.getName().equals("META-INF")) {
+        if ("META-INF".equals(dir.getName())) {
             dir = dir.getParentFile(); // Scrape "META-INF" off
         }
         return dir;
@@ -29,7 +29,7 @@ public class ClasspathUrlDecoder {
         StringBuilder result = new StringBuilder(fileName.length());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        for (int i = 0; i < fileName.length();) {
+        for (int i = 0; i < fileName.length(); i++) {
             char c = fileName.charAt(i);
 
             if (c == '%') {
@@ -43,7 +43,7 @@ public class ClasspathUrlDecoder {
                     int d2 = Character.digit(fileName.charAt(i + 2), 16);
 
                     if (d1 == -1 || d2 == -1) {
-                        throw new IllegalArgumentException("Invalid % sequence (" + fileName.substring(i, i + 3) + ") at: " + String.valueOf(i));
+                        throw new IllegalArgumentException("Invalid % sequence (" + fileName.substring(i, i + 3) + ") at: " + i);
                     }
 
                     out.write((byte) ((d1 << 4) + d2));
@@ -59,8 +59,6 @@ public class ClasspathUrlDecoder {
             } else {
                 result.append(c);
             }
-
-            i++;
         }
         return result.toString();
     }

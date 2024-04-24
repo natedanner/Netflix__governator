@@ -92,7 +92,7 @@ public class Grapher
     public Grapher(Injector injector, String... packages) {
         this.injector = injector;
         // Scan all the injection bindings to find the root keys
-        this.roots = new HashSet<Key<?>>();
+        this.roots = new HashSet<>();
         for (Key<?> k : injector.getAllBindings().keySet()) {
             Package classPackage = k.getTypeLiteral().getRawType().getPackage();
             if (classPackage == null) {

@@ -34,7 +34,7 @@ public class GovernatorServletContainerInitializer implements ServletContainerIn
 
     private WebApplicationInitializer getInitializer(Set<Class<?>> initializerClasses, ServletContext servletContext)
             throws ServletException {
-        List<WebApplicationInitializer> initializers = new LinkedList<WebApplicationInitializer>();
+        List<WebApplicationInitializer> initializers = new LinkedList<>();
         if (initializerClasses != null) {
             for (Class<?> initializerClass : initializerClasses) {
                 if (!initializerClass.isInterface() && !Modifier.isAbstract(initializerClass.getModifiers())

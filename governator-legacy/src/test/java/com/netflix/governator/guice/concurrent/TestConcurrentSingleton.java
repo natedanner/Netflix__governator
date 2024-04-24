@@ -31,7 +31,7 @@ import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
 import com.netflix.governator.lifecycle.LoggingLifecycleListener;
 
 public class TestConcurrentSingleton {
-    private static Logger LOG = LoggerFactory.getLogger(TestConcurrentSingleton.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TestConcurrentSingleton.class);
     
     public static interface IParent {
         

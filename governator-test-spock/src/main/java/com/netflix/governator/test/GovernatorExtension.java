@@ -1,6 +1,7 @@
 package com.netflix.governator.test;
 
 import org.spockframework.runtime.extension.AbstractGlobalExtension;
+import org.spockframework.runtime.extension.IMethodInvocation;
 import org.spockframework.runtime.model.SpecInfo;
 
 import com.netflix.governator.guice.test.AnnotationBasedTestInjectorManager;
@@ -31,9 +32,7 @@ public class GovernatorExtension extends AbstractGlobalExtension {
             annotationBasedTestInjectorManager.prepareConfigForTestClass(spec.getReflection());
     
             //Before test class 
-            spec.getSetupSpecInterceptors().add(invocation -> {
-                invocation.proceed();
-            });
+            spec.getSetupSpecInterceptors().add(IMethodInvocation::proceed);
             
             //Before test methods
             spec.getSetupInterceptors().add(invocation -> {

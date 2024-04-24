@@ -21,7 +21,7 @@ import com.google.inject.Scope;
 /**
  * A singleton factory that returns a Guice {@link Scope} that enables lazy singletons
  */
-public class LazySingletonScope
+public final class LazySingletonScope
 {
     /**
      * Returns the scope

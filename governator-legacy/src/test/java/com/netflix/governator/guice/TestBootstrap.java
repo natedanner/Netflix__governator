@@ -23,7 +23,7 @@ public class TestBootstrap {
     private static final Logger LOG = LoggerFactory.getLogger(TestBootstrap.class);
     
     public static class TestAction implements PostInjectorAction {
-        private boolean injected = false;
+        private boolean injected;
         private final String name;
         public TestAction(String name) {
             this.name = name;

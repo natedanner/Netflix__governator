@@ -54,9 +54,9 @@ public class BindingReport implements PostInjectorAction {
             binding.getValue().acceptVisitor(new DefaultElementVisitor<Void>() {
                 @Override
                 public <T> Void visit(Binding<T> binding) {
-                    sb.append("\n" + label  + binding.getKey()).append("\n");
+                    sb.append("\n").append(label).append(binding.getKey()).append("\n");
                     if (binding.getSource() != null) {
-                        sb.append("   where : " + binding.getSource()).append("\n");;
+                        sb.append("   where : ").append(binding.getSource()).append("\n");
                     }
                     binding.acceptTargetVisitor(new DefaultBindingTargetVisitor<T, Void>() {
                         public Void visit(UntargettedBinding<? extends T> untargettedBinding) {
@@ -66,35 +66,35 @@ public class BindingReport implements PostInjectorAction {
                         
                         @Override
                         public Void visit(InstanceBinding<? extends T> binding) {
-                            sb.append("  to (I) : " + binding.getInstance().getClass()).append("\n");
+                            sb.append("  to (I) : ").append(binding.getInstance().getClass()).append("\n");
                             sb.append(describeInjectionPoints(TypeLiteral.get(binding.getInstance().getClass())));
                             return null;
                         }
 
                         @Override
                         public Void visit(ProviderInstanceBinding<? extends T> binding) {
-                            sb.append("  to (P) : " + binding.getProviderInstance().getClass()).append("\n");
+                            sb.append("  to (P) : ").append(binding.getProviderInstance().getClass()).append("\n");
                             sb.append(describeInjectionPoints(TypeLiteral.get(binding.getProviderInstance().getClass())));
                             return null;
                         }
 
                         @Override
                         public Void visit(ProviderKeyBinding<? extends T> binding) {
-                            sb.append("  to (P) : " + binding.getProviderKey()).append("\n");
+                            sb.append("  to (P) : ").append(binding.getProviderKey()).append("\n");
                             sb.append(describeInjectionPoints(binding.getProviderKey().getTypeLiteral()));
                             return null;
                         }
 
                         @Override
                         public Void visit(LinkedKeyBinding<? extends T> binding) {
-                            sb.append("  to (I) : " + binding.getLinkedKey()).append("\n");
+                            sb.append("  to (I) : ").append(binding.getLinkedKey()).append("\n");
                             sb.append(describeInjectionPoints(binding.getLinkedKey().getTypeLiteral()));
                             return null;
                         }
 
                         @Override
                         public Void visit(ProviderBinding<? extends T> binding) {
-                            sb.append("  to (P) : " + binding.getProvidedKey()).append("\n");
+                            sb.append("  to (P) : ").append(binding.getProvidedKey()).append("\n");
                             sb.append(describeInjectionPoints(binding.getProvidedKey().getTypeLiteral()));
                             return null;
                         }
@@ -116,7 +116,7 @@ public class BindingReport implements PostInjectorAction {
             List<Dependency<?>> deps = ip.getDependencies();
             if (!deps.isEmpty()) {
                 for (Dependency<?> dep : deps) {
-                    sb.append("     dep : " + dep.getKey()).append("\n");
+                    sb.append("     dep : ").append(dep.getKey()).append("\n");
                 }
             }
         }
@@ -130,7 +130,7 @@ public class BindingReport implements PostInjectorAction {
                 List<Dependency<?>> deps = ip2.getDependencies();
                 if (!deps.isEmpty()) {
                     for (Dependency<?> dep : deps) {
-                        sb.append("     mem : " + dep.getKey()).append("\n");
+                        sb.append("     mem : ").append(dep.getKey()).append("\n");
                     }
                 }
             }

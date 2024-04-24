@@ -19,9 +19,9 @@ public class TestAutoBindModuleInjection {
             bind(String.class).annotatedWith(Names.named("foo")).toInstance("found");
         }
     }
-    
+
     @AutoBindSingleton
-    public static class MyModule extends AbstractModule {
+    public static final class MyModule extends AbstractModule {
         @Inject
         private MyModule(FooModule foo) {
         }
@@ -31,9 +31,9 @@ public class TestAutoBindModuleInjection {
             bind(String.class).annotatedWith(Names.named("MyModule")).toInstance("found");
         }
     }
-    
+
     @AutoBindSingleton
-    public static class MyModule2 extends AbstractModule {
+    public static final class MyModule2 extends AbstractModule {
         @Inject
         private MyModule2() {
         }

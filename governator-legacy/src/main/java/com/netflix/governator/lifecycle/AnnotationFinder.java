@@ -32,22 +32,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class AnnotationFinder extends ClassVisitor {
-	private static Logger log = LoggerFactory.getLogger(AnnotationFinder.class);
-	
-    private Set<Type> annotationTypes;
+    private static final Logger log = LoggerFactory.getLogger(AnnotationFinder.class);
+
+    private final Set<Type> annotationTypes;
 
     private Set<Class<?>> annotatedClasses = Collections.emptySet();
-    private Set<Method> annotatedMethods = new HashSet<>();
-    private Set<Constructor> annotatedConstructors = new HashSet<>();
-    private Set<Field> annotatedFields = new HashSet<>();
+    private final Set<Method> annotatedMethods = new HashSet<>();
+    private final Set<Constructor> annotatedConstructors = new HashSet<>();
+    private final Set<Field> annotatedFields = new HashSet<>();
 
     private String className;
     private Class<?> clazz;
-    private ClassLoader classLoader;
+    private final ClassLoader classLoader;
 
     private Class<?> selfClass() {
-        if (clazz == null)
+        if (clazz == null) {
             clazz = classFromInternalName(className);
+        }
         return clazz;
     }
 
@@ -78,7 +79,7 @@ public final class AnnotationFinder extends ClassVisitor {
         Type type = getType(desc);
         for (Type annotationType : annotationTypes)  {
             if (annotationType.equals(type)) {
-                annotatedClasses = Collections.<Class<?>>singleton(selfClass());
+                annotatedClasses = Collections.singleton(selfClass());
                 break;
             }
         }
@@ -177,12 +178,13 @@ public final class AnnotationFinder extends ClassVisitor {
                     }
 
                     try {
-                        if ("<init>".equals(name))
+                        if ("<init>".equals(name)) {
                             annotatedConstructors.add(selfClass()
                                     .getDeclaredConstructor(argClasses));
-                        else
+                        } else {
                             annotatedMethods.add(selfClass().getDeclaredMethod(
                                     name, argClasses));
+                        }
                     } catch (NoClassDefFoundError e) {
                     	log.info("Unable to scan constructor of '{}' NoClassDefFoundError looking for '{}'", selfClass().getName(), e.getMessage());
                     } catch (NoSuchMethodException e) {

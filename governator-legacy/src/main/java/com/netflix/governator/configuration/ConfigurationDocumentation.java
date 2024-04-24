@@ -30,7 +30,7 @@ public class ConfigurationDocumentation
 {
     private final Map<String, Entry> entries = Maps.newConcurrentMap();
 
-    public static class Entry
+    public static final class Entry
     {
         public final Field field;
         public final String configurationName;

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ThreadLocalScope implements Scope {
 
-    private final ThreadLocal<Map<Key<?>, Object>> content = new ThreadLocal<Map<Key<?>, Object>>();
+    private final ThreadLocal<Map<Key<?>, Object>> content = new ThreadLocal<>();
 
     public void enter() {
         checkState(content.get() == null, "ThreadLocalScope already exists in thread " + Thread.currentThread().getId());

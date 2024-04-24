@@ -78,9 +78,10 @@ task generateJDiffReport(dependsOn: '_jDiff_cloneOldVersion') {
         final olderVersion = project.getProperty('jDiff.olderVersion')
         final olderVersionRoot = new File("${rootProject.buildDir}/jDiff/${rootProject.name}-${olderVersion}")
 
-        if (olderVersion == null)
+        if (olderVersion == null) {
             throw new IllegalArgumentException(
-                'Set `jDiff.olderVersion` property to indicate older of the two versions being compared')
+                    'Set `jDiff.olderVersion` property to indicate older of the two versions being compared')
+        }
 
         final newerVersion = project.hasProperty('jDiff.newerVersion') ? project.getProperty('jDiff.newerVersion') : rootProject.version
         final newerVersionRoot = rootProject.rootDir

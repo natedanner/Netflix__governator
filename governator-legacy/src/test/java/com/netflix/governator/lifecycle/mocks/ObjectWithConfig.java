@@ -23,7 +23,7 @@ import java.util.*;
 public class ObjectWithConfig
 {
     @Configuration(value = "test.b", documentation = "this is a boolean")
-    public boolean aBool = false;
+    public boolean aBool;
 
     @Configuration("test.i")
     public int anInt = 1;
@@ -38,11 +38,11 @@ public class ObjectWithConfig
     public String aString = "test";
 
     @Configuration("test.dt")
-    public Date aDate = null;
+    public Date aDate;
 
     @Configuration(value = "test.obj")
     public List<Integer> ints = Arrays.asList(5,6,7);
 
     @Configuration(value = "test.mapOfMaps")
-    public Map<String, Map<String, String>> mapOfMaps = new HashMap<String, Map<String, String>>();
+    public Map<String, Map<String, String>> mapOfMaps = new HashMap<>();
 }
